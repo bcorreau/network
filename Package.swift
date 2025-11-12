@@ -1,0 +1,38 @@
+// swift-tools-version:5.5
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+import PackageDescription
+
+let package = Package(
+    name: "Network",
+    defaultLocalization: "en",
+    platforms: [.iOS(.v12)],
+    products: [
+        // Products define the executables and libraries a package produces, and make them visible to other packages.
+        .library(
+            name: "NetworkService",
+            targets: ["Network"]
+        )
+    ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(url: "https://github.com/datatheorem/TrustKit", from: "3.0.0"),
+        .package(url: "https://github.com/daisuke-t-jp/MurmurHash-Swift", from: "1.1.1"),
+        .package(url: "https://github.com/krzyzanowskim/CryptoSwift", .upToNextMajor(from: "1.3.8"))
+
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages this package depends on.
+        .target(
+            name: "Network",
+            dependencies: ["MurmurHash-Swift", "CryptoSwift", "TrustKit"],
+            path: "Sources",
+            // resources: [.process("Resources")]
+        ),
+        .testTarget(
+            name: "NetworkTests",
+            dependencies: ["Network"],
+            path: "Tests"
+        )
+    ]
+)
