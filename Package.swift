@@ -26,8 +26,8 @@ let package = Package(
         .target(
             name: "Network",
             dependencies: ["MurmurHash-Swift", "CryptoSwift", "TrustKit"],
-            path: "Sources"
-            // resources: [.process("Resources")]
+            path: "Sources",
+            resources: []
         ),
         .testTarget(
             name: "NetworkTests",
